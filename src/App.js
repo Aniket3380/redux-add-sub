@@ -9,6 +9,7 @@ function App({count,setAdd,setSub}) {
       <button onClick={setAdd}>addition</button>   
       <button onClick={setSub}>substraction</button>
       <button>reset</button>
+      <button>ok</button>
        </div>
   );
 }

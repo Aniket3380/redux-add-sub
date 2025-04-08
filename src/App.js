@@ -10,7 +10,10 @@ function App({count,setAdd,setSub}) {
   const [value,setValue]=useState()
   const[error,setError]=useState("")
   const[show,setShow]=useState(false)
-
+  const[data,setData]=useState();
+  const [user,setUser]=useState()
+  const[pass,setPass]=useState()
+  const[err,seterr]=useState()
   const handleSubmit=()=>{
    if(value % 5===0)
    {
@@ -20,9 +23,40 @@ function App({count,setAdd,setSub}) {
     setError("please prvide write")
    }
   }
+
+  const inputSubmit=()=>
+  {
+      let res=`@${data+data.length}`
+      setData(res)
+  }
+
+  const submitForm=(e)=>
+  {
+    e.preventDefault();
+    if(!pass & !user )
+    {
+      seterr("pleaee provifr data")
+    }
+    else if (pass.length<=6)
+      {
+        seterr("pass is leass than 6")
+
+      }
+      else{
+        seterr("done")
+      }
+    
+  }
   
+  
+
+
   return (
     <div className="App">
+      <h1>{data}</h1>
+      <input type="text" onChange={(e)=>setData(e.target.value)} value={data}/>
+      <button onClick={inputSubmit}>submit me </button>
+      
       {
         show ?
         <Suspense fallback={<h3>loading</h3>}><User/></Suspense>
@@ -41,6 +75,16 @@ function App({count,setAdd,setSub}) {
       <button onClick={setSub}>substraction</button>
       <button>reset</button>
       <button>ok</button>
+      {
+        err?err:null
+      }
+      <form>
+        <label>Username</label>
+        <input type="text" onChange={(e)=>setUser(e.target.value)} value={user}/>
+        <label>Password</label>
+        <input type="password" onChange={(e)=>setPass(e.target.value)}value={pass}/> 
+        <button onClick={submitForm}> submit</button>
+      </form>
        </div>
   );
 }
